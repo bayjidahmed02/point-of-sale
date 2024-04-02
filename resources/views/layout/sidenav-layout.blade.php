@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title></title>
+    <title>@yield('page_title') | Coding Sports</title>
 
     <link rel="icon" type="image/x-icon" href="{{ asset('/favicon.ico') }}" />
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" />
@@ -79,7 +79,7 @@
             <span class="side-bar-item-caption">Dashboard</span>
         </a>
 
-        <a href="{{ url('/customerPage') }}" class="side-bar-item">
+        <a href="{{ route('customer') }}" class="side-bar-item">
             <i class="bi bi-people"></i>
             <span class="side-bar-item-caption">Customer</span>
         </a>

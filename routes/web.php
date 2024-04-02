@@ -4,6 +4,7 @@ use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
 
@@ -41,4 +42,14 @@ Route::middleware([TokenVerificationMiddleware::class])->group(function () {
     Route::post('/category-details', [CategoryController::class, 'details']);
     Route::post('/category-update', [CategoryController::class, 'update']);
     Route::post('/category-delete', [CategoryController::class, 'delete']);
+});
+
+
+Route::middleware([TokenVerificationMiddleware::class])->group(function () {
+    Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
+    Route::post('/customer-create', [CustomerController::class, 'create']);
+    Route::get('/customer-list', [CustomerController::class, 'list']);
+    Route::post('/customer-details', [CustomerController::class, 'details']);
+    Route::post('/customer-update', [CustomerController::class, 'update']);
+    Route::post('/customer-delete', [CustomerController::class, 'delete']);
 });
