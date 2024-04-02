@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
@@ -14,7 +15,6 @@ Route::view('/registration', 'pages.auth.registration-page')->name('registration
 Route::view('/login', 'pages.auth.login-page')->name('login');
 Route::view('/send-otp', 'pages.auth.send-otp-page')->name('sendOTP');
 Route::view('/verify-otp', 'pages.auth.verify-otp-page');
-Route::view('/profile', 'pages.dashboard.profile-page')->name('profile');
 
 
 // Authentication API Routes
@@ -27,6 +27,7 @@ Route::post('/verify-otp', [UserController::class, 'verifyOTP']);
 Route::middleware([TokenVerificationMiddleware::class])->group(function () {
     Route::get('/', [UserController::class, 'index']);
     Route::view('/dashboard', 'pages.dashboard.dashboard-page');
+    Route::view('/profile', 'pages.dashboard.profile-page')->name('profile');
     Route::view('/reset-password', 'pages.auth.reset-pass-page');
     Route::get('/profile-details', [UserController::class, 'profileDetails']);
     Route::post('/update', [UserController::class, 'updateProfile']);
@@ -63,4 +64,14 @@ Route::middleware([TokenVerificationMiddleware::class])->group(function () {
     Route::post('/product-details', [ProductController::class, 'details']);
     Route::post('/product-update', [ProductController::class, 'update']);
     Route::post('/product-delete', [ProductController::class, 'delete']);
+});
+
+// Invoice and API Routes
+Route::middleware([TokenVerificationMiddleware::class])->group(function () {
+    Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice.index');
+    Route::get('/sale', [InvoiceController::class, 'salePage'])->name('sale');
+    Route::post('/invoice-create', [InvoiceController::class, 'create']);
+    Route::post('/invoice-details', [InvoiceController::class, 'details']);
+    Route::get('/invoice-list', [InvoiceController::class, 'list']);
+    Route::post('/invoice-delete', [InvoiceController::class, 'delete']);
 });
