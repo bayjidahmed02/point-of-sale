@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
 
@@ -34,7 +35,7 @@ Route::middleware([TokenVerificationMiddleware::class])->group(function () {
 });
 
 
-// Category Routes
+// Category web and API Routes
 Route::middleware([TokenVerificationMiddleware::class])->group(function () {
     Route::get('/category', [CategoryController::class, 'index'])->name('category');
     Route::post('/category-create', [CategoryController::class, 'create']);
@@ -44,7 +45,7 @@ Route::middleware([TokenVerificationMiddleware::class])->group(function () {
     Route::post('/category-delete', [CategoryController::class, 'delete']);
 });
 
-
+// Customer web and API Routes
 Route::middleware([TokenVerificationMiddleware::class])->group(function () {
     Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
     Route::post('/customer-create', [CustomerController::class, 'create']);
@@ -52,4 +53,14 @@ Route::middleware([TokenVerificationMiddleware::class])->group(function () {
     Route::post('/customer-details', [CustomerController::class, 'details']);
     Route::post('/customer-update', [CustomerController::class, 'update']);
     Route::post('/customer-delete', [CustomerController::class, 'delete']);
+});
+
+// Product and API Routes
+Route::middleware([TokenVerificationMiddleware::class])->group(function () {
+    Route::get('/product', [ProductController::class, 'index'])->name('product');
+    Route::post('/product-create', [ProductController::class, 'create']);
+    Route::get('/product-list', [ProductController::class, 'list']);
+    Route::post('/product-details', [ProductController::class, 'details']);
+    Route::post('/product-update', [ProductController::class, 'update']);
+    Route::post('/product-delete', [ProductController::class, 'delete']);
 });
