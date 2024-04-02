@@ -61,7 +61,6 @@
                                 use App\Models\User;
                                 $id = request()->header('id');
                                 $user = User::where('id', $id)->first();
-
                             @endphp
                             <h6>{{ $user->firstName }} {{ $user->lastName }}</h6>
 

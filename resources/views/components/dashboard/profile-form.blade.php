@@ -86,6 +86,7 @@
                 if (res.status === 200 && res.data.status === 'success') {
                     successToast(res.data['message']);
                     await getProfile();
+                    window.location.reload()
                 } else {
                     errorToast(res.status.message)
                 }
